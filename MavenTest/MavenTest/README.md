@@ -1,0 +1,5 @@
+Maven实例代码
+helloDemo是一个java代码示例
+MavenwebDemo是javaweb工程
+Parent里面的pom继承和聚合
+pomDemo是关于生命周期的示例
