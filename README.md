@@ -1,11 +1,8 @@
-# train_group2
+# jianmin.xu01
 
-Java培训2组
+徐建民
 
-## maven-examples
+## MavenTest
 
-Maven 示例工程
+Maven 示例
 
-## javaweb-examples
-
-jsp,servlet javaweb示例工程
