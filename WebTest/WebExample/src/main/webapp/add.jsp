@@ -12,11 +12,13 @@
     <title>添加商品</title>
 </head>
 <body>
-<div style="top: 0px;right: 0px;">
-    欢迎:<c:out value="${username}"> </c:out>
-    <a href="index.jsp"><input type="button" value="退出"></a>
+<div style="position:absolute;top: 0px;right: 0px;">
+    <% String names =(String) session.getAttribute("username");%>
+    欢迎:<%= names %>
+    <form action="LoginOut" method="get"><input type="submit" value="退出" ></form>
 </div>
-<form style="align-content: center " action="add" method="get">
+</div>
+<form style="width: 300px;margin: 100px auto;text-align: center;"action="add" method="get">
     请输入商品名称:
     <input type="text" name="thing">
     <input type="submit" value="添加">

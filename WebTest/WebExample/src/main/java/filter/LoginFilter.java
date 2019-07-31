@@ -20,11 +20,12 @@ public class LoginFilter implements Filter {
         HttpSession httpSession =hseq.getSession();
         String path =hseq.getRequestURI();
         String name = (String) httpSession.getAttribute("username");
+        System.out.println(name+"Filter");
         if (path.indexOf(path)>-1){
             filterChain.doFilter(hseq,srpe);
             return;
         }
-        if(name==null||"".equals(name)){
+        if(name==null||" ".equals(name)||"".equals(name)){
             srpe.sendRedirect("index.jsp");
         }else {
             filterChain.doFilter(hseq,srpe);
