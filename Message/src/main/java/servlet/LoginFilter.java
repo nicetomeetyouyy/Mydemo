@@ -25,7 +25,7 @@ public class LoginFilter implements Filter {
         resp.setCharacterEncoding("UTF-8");
             HttpSession session = req.getSession();
         String name =(String)session.getAttribute("username");
-        if(name==null||name.equals("")||name.equals(" ")){
+        if(name==null||name.equals("")||" ".equals(name)){
             resp.sendRedirect("index.jsp");
 
         }else {

@@ -19,6 +19,7 @@ public class UserList extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
         UserDao userDao=new UserDao();
         List<User> list=userDao.findALL();
         req.setAttribute("userlist",list);
@@ -33,9 +34,10 @@ public class UserList extends HttpServlet {
         String phone =req.getParameter("phone");
         System.out.println(phone);
         if(id!=null) {
-
         int i =Integer.valueOf(id);
          userDao.updateUser(i,name,pwd,email,phone);
+         list=userDao.findALL();
+         req.setAttribute("userlist",list);
         }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("users.jsp");
         requestDispatcher.forward(req, resp);
@@ -46,6 +48,7 @@ public class UserList extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
         UserDao userDao=new UserDao();
         HttpSession session = req.getSession();
         String name =(String)session.getAttribute("username");

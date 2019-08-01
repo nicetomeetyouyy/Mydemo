@@ -23,7 +23,7 @@
   var sb=document.getElementById("submit");
   var username=document.getElementById("username");
   sb.onclick=function () {
-    if(username.value.length==0){
+    if(username.value.length==0||username.value==" "){
       alert("您的输入有误！请重新输入！");
       return false;
     }

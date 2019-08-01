@@ -17,6 +17,7 @@
         <%
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
             User user =(User) request.getAttribute("user");
         %>
         id:<br><input type="text" name="id" value="<%=user.getid()%>" ><br>
