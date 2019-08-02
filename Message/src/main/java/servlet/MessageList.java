@@ -23,10 +23,11 @@ public class MessageList extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html,charset=utf-8");
         String uri=req.getRequestURI();
           System.out.println(uri);
         MessageDao md =new MessageDao();
-        resp.setContentType("text/html,charset=utf-8");
+
 
         List<Message> list=md.findAll();
         req.setAttribute("messList",list);

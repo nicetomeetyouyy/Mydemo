@@ -32,6 +32,7 @@
     <%
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html,charset=utf-8");
         List<User> list =(List<User>) request.getAttribute("userlist");
     %>
     <table cellpadding="0" cellspacing="0" border="1" width="100%">

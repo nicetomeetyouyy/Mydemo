@@ -13,7 +13,11 @@
 </head>
 <body>
 <div style="position:absolute;top: 0px;right: 0px;">
-    <% String names =(String)session.getAttribute("username");%>
+    <%
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String names =(String)session.getAttribute("username");%>
     欢迎:<%= names %>
     <form action="LogginOut" method="get"><input type="submit" value="退出" ></form>
 </div>

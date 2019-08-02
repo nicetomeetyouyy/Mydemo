@@ -26,7 +26,7 @@
 <%
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
-
+    response.setContentType("text/html;charset=UTF-8");
 //    request.setAttribute("messagelist",messageslist);
     List<Message> list =(List<Message>)request.getAttribute("messList");
 //    List<Message> list=messageslist;

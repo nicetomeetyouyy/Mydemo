@@ -56,7 +56,7 @@ public class MessageDao {
             resultSet=ps.executeQuery();
             while (resultSet.next()){
                 Message message =new Message();
-                message.setTitle(resultSet.getNString("title"));
+                message.setTitle(resultSet.getString("title"));
                 message.setContent(resultSet.getString("content"));
                 message.setUser_id(resultSet.getInt("use_id"));
                 messages.add(message);

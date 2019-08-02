@@ -23,6 +23,7 @@ public class LoginFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse)servletResponse;
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html,charset=utf-8");
             HttpSession session = req.getSession();
         String name =(String)session.getAttribute("username");
         if(name==null||name.equals("")||" ".equals(name)){

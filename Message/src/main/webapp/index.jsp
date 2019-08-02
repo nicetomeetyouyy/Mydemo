@@ -11,6 +11,11 @@
   <title>登录界面</title>
 </head>
 <body>
+<%
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+  response.setContentType("text/html;charset=UTF-8");
+%>
 <div style="width: 300px; margin:100px auto; ">
 <form action="login"  method="post">
   用户名:
