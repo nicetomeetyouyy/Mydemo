@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.AccessMapper">
+    <select id="findRole_acc" resultType="entity.Access">
+        SELECT * FROM access WHERE id in(
+        SELECT aid FROM role_acc WHERE rid =#{0}
+        )
+    </select>
+    <select id="findBygroup" resultType="entity.Access">
+         SELECT * FROM access WHERE id in(
+        SELECT gid FROM groups_acc WHERE gid =#{0}
+        )
+    </select>
+    <select id="findAll" resultType="entity.Access">
+        SELECT * FROM access
+    </select>
+</mapper>

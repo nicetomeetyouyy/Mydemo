@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.UserMapper">
+    <select id="findAll" resultType="entity.User">
+    SELECT * FROM users
+   </select>
+    <insert id="insertUser" parameterType="entity.User">
+    INSERT into users(user_name,pwd,email,phone,rid,gid)VALUES
+    (#{user_name},#{pwd},#{email},#{phone},#{rid},#{gid})
+    </insert>
+    <select id="findByname" parameterType="String" resultType="entity.User">
+        SELECT * from users WHERE user_name=#{0}
+    </select>
+    <update id="updateUser" parameterType="entity.User">
+        update users set
+        user_name=#{user_name},
+        pwd=#{pwd},
+        email=#{email},
+        phone=#{phone},
+        rid=#{rid},
+        gid=#{gid}
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete FROM users where id =#{0}
+    </delete>
+    <select id="findLogin"  resultType="entity.User">
+        SELECT * from users where user_name=#{0}AND pwd=#{1}
+    </select>
+    <delete id="deleteUserRid" parameterType="int" >
+        delete FROM users where rid= #{0}
+    </delete>
+    <select id="findByGid" parameterType="int" resultType="entity.User">
+        SELECT * from users where gid=#{0}
+    </select>
+</mapper>
+
