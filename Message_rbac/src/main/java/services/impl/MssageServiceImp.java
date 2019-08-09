@@ -11,7 +11,7 @@ import services.MessageService;
 import java.util.List;
 
 @Service
-public class MwssageServiceImp implements MessageService {
+public class MssageServiceImp implements MessageService {
     @Autowired
     private MessageMapper mapper;
     @Override
@@ -42,5 +42,10 @@ public class MwssageServiceImp implements MessageService {
     @Override
     public Message findById(int id) {
         return mapper.findById(id);
+    }
+
+    @Override
+    public List<Message> findGp(int gid) {
+        return mapper.findGp(gid);
     }
 }

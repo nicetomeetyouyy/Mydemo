@@ -15,6 +15,8 @@ import services.UserService;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Attribute;
+
 @Controller
 @EnableAutoConfiguration
 public class UserControl {
@@ -133,5 +135,13 @@ public class UserControl {
         request.getSession().setAttribute("userlist",list);
         request.getSession().setAttribute("roleList",list1);
         return "users";
+    }
+    @RequestMapping("findUser")
+    public String findUser(HttpServletRequest request){
+       User user = (User) request.getSession().getAttribute("User");
+       List<User> list =userService.findByGid(user.getGid());
+        request.getSession().setAttribute("userlist",list);
+        return "users";
+
     }
 }

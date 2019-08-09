@@ -10,4 +10,17 @@
     <delete id="deleteRole" parameterType="int">
         DELETE FROM role WHERE id=#{0}
     </delete>
+    <delete id="deleteAcc" parameterType="int">
+        DELETE from role_acc WHERE rid =#{0}
+    </delete>
+    <insert id="insertRole" parameterType="String">
+        INSERT INTO role(name)VALUES (#{0})
+    </insert>
+    <select id="findRid" parameterType="String" resultType="entity.Role">
+        SELECT * from role WHERE name =#{0}
+    </select>
+    <update id="updateRole" parameterType="entity.Role">
+        update role set name =#{name}
+        WHERE id =#{id}
+    </update>
 </mapper>

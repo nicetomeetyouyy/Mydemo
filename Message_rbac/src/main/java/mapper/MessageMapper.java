@@ -11,5 +11,5 @@ public interface MessageMapper {
     public void insertMessage(Message message);
     public void updateMessage(Message message);
     public Message findById(int id);
-
+    public List<Message> findGp(int gid);
 }

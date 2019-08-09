@@ -27,4 +27,19 @@ public class AccessServiceImp implements AccessService {
         return accessMapper.findAll();
     }
 
+    @Override
+    public void insertAcc(int rid, int aid) {
+        accessMapper.insertAcc(rid,aid);
+    }
+
+    @Override
+    public void deleteAccR(int rid) {
+        accessMapper.deleteAccR(rid);
+    }
+
+    @Override
+    public void deleteACcA(int rid, int aid) {
+        accessMapper.deleteACcA(rid,aid);
+    }
+
 }

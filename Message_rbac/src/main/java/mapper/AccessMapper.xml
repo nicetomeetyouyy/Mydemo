@@ -14,4 +14,13 @@
     <select id="findAll" resultType="entity.Access">
         SELECT * FROM access
     </select>
+    <insert id="insertAcc">
+        INSERT into role_acc(rid,aid)VALUES (#{0},#{1})
+    </insert>
+    <delete id="deleteAccR" parameterType="int">
+        DELETE FROM role_acc WHERE rid =#{0}
+    </delete>
+    <delete id="deleteAccA">
+        DELETE FROM role_acc WHERE rid=#{0} AND aid=${1}
+    </delete>
 </mapper>

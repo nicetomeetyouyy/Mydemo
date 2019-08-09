@@ -39,6 +39,7 @@
 //    request.setAttribute("messagelist",messageslist);
     List<Message> list =(List<Message>)request.getSession().getAttribute("messList");
     User user = (User) request.getSession().getAttribute("User");
+    List<User>users= (List<User>) request.getSession().getAttribute("userlist");
     int rid=user.getRid();
     //    List<Message> list=messageslist;
 
@@ -55,7 +56,6 @@
     <%
         if(rid!=1){
     %>
-    <form action="findUser"><input type="submit" value="查看同组用户" class="btn btn-success"></form>
     <%}%>
     <form action="updateUser"method="post"><input type="submit" value="修改个人信息" class="btn btn-success"></form>
 </div>

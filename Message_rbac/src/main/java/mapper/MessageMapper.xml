@@ -24,4 +24,9 @@
     <select id="findById" parameterType="int" resultType="entity.Message">
         SELECT * from message WHERE id=#{0}
     </select>
+    <select id="findGp" parameterType="int" resultType="entity.Message">
+        SELECT * from message WHERE use_id in (
+        SELECT id FROM users WHERE gid=#{0}
+        )
+    </select>
 </mapper>

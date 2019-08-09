@@ -51,6 +51,8 @@ public class MessageControl {
             user.setAccesses(list_acc);
             request.getSession().setAttribute("User",user);
             List<Message> list=messageService.findAll();
+            List<User> list1 =userService.findAll();
+            request.getSession().setAttribute("userlist",list1);
             request.getSession().setAttribute("messList",list);
             return  "melist";
 
@@ -129,4 +131,5 @@ public class MessageControl {
        request.getSession().setAttribute("messList",list);
        return "melist";
    }
+
 }

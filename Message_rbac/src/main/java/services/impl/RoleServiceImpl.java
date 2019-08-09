@@ -29,4 +29,24 @@ public class RoleServiceImpl implements RoleServices {
         userService.deleteUserRid(rid);
         roleMapper.deleteRole(rid);
     }
+
+    @Override
+    public void deleteAcc(int rid){
+        roleMapper.deleteAcc(rid);
+    }
+
+    @Override
+    public void insertRole(String name) {
+        roleMapper.insertRole(name);
+    }
+
+    @Override
+    public Role findRid(String name) {
+        return roleMapper.findRid(name);
+    }
+
+    @Override
+    public void updateRole(Role role) {
+        roleMapper.updateRole(role);
+    }
 }
