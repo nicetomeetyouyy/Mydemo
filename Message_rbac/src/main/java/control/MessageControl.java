@@ -1,27 +1,24 @@
 package control;
 
+import annotation.Log;
 import entity.Access;
 import entity.Message;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import services.AccessService;
 import services.MessageService;
 import services.UserService;
 
-import javax.lang.model.element.NestingKind;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
-@EnableAutoConfiguration
+
 
 public class MessageControl {
     @Autowired
@@ -31,29 +28,41 @@ public class MessageControl {
     private UserService userService;
     @Autowired
     private AccessService accessService;
-
+    @Log(operationName = "用户登录")
     @RequestMapping("login")
-    public String toMessageList(HttpServletRequest request, HttpServletResponse response){
+    public String toMessageList(HttpServletRequest request) {
         String name =request.getParameter("username");
         String pwd=request.getParameter("pwd");
-        System.out.println(pwd);
+//        System.out.println(pwd);
         User user=new User();
         if(name!=null&&pwd!=null){
-        request.getSession().setAttribute("username",name);
-         user =userService.findLogin(name,pwd);
+            request.getSession().setAttribute("username",name);
+            user=userService.findLogin(name,pwd);
+
         }
         if(user==null){
-            return "index";
+                return "index";
         }else{
+
             List<Access> list_acc= accessService.findRole_acc(user.getRid());
+            /*for (Access a:list_acc
+            ) {
+                System.out.println(a.getId()+a.getName()+"c权限");
+            }*/
             List<Access> list_group=accessService.findBygroup(user.getGid());
+            List<Access> allAcc=accessService.findAll();
             list_acc.addAll(list_group);
+           /* for (Access a:list_acc
+                  ) {
+                System.out.println(a.getId()+a.getName()+"chadaode quanxian");
+            }*/
             user.setAccesses(list_acc);
             request.getSession().setAttribute("User",user);
             List<Message> list=messageService.findAll();
             List<User> list1 =userService.findAll();
             request.getSession().setAttribute("userlist",list1);
             request.getSession().setAttribute("messList",list);
+            request.getSession().setAttribute("allAcc",allAcc);
             return  "melist";
 
         }
@@ -62,12 +71,22 @@ public class MessageControl {
 
     @RequestMapping("melist")
     public String messList(HttpServletRequest request){
+        User user=userService.findByname((String) request.getSession().getAttribute("username"));
+        List<Access> list_acc= accessService.findRole_acc(user.getRid());
+        List<Access> list_group=accessService.findBygroup(user.getGid());
+        list_acc.addAll(list_group);
+        user.setAccesses(list_acc);
+        request.getSession().setAttribute("User",user);
         List<Message> list=messageService.findAll();
+        List<User> list1 =userService.findAll();
+        request.getSession().setAttribute("userlist",list1);
         request.getSession().setAttribute("messList",list);
+        List<Access> allAcc=accessService.findAll();
+        request.getSession().setAttribute("allAcc",allAcc);
         return  "melist";
     }
 
-
+    @Log(operationName = "删除留言")
     @RequestMapping(value="/deleteMessage")
     public String deleteMessage (HttpServletRequest request){
         String id =request.getParameter("delete_id");
@@ -83,7 +102,7 @@ public class MessageControl {
     public String addMessage (){
         return "addMessage";
     }
-
+    @Log(operationName = "新建留言")
     @RequestMapping(value = "/newMessage",method = RequestMethod.POST)
    public String newMessage(HttpServletRequest request){
         String title=request.getParameter("title");
@@ -101,12 +120,15 @@ public class MessageControl {
         request.getSession().setAttribute("messList",list);
         return "melist";
    }
+    @Log(operationName = "查找留言")
     @RequestMapping("findMessageByuser")
    public String findMessageByuser(HttpServletRequest request){
         String username =request.getParameter("serchmessage");
+
         User user =userService.findByname(username);
         List<Message> list=messageService.findByuse_id(user.getId());
         request.getSession().setAttribute("messList",list);
+        System.out.println(username);
         return "melist";
    }
    @RequestMapping("updateMessage")
@@ -118,6 +140,7 @@ public class MessageControl {
         request.getSession().setAttribute("Message",message);
         return "updateToMessage";
    }
+   @Log(operationName = "修改留言")
    @RequestMapping("updateToMessage")
    public String updateToMessage(HttpServletRequest request){
         String title=request.getParameter("title");
@@ -131,5 +154,22 @@ public class MessageControl {
        request.getSession().setAttribute("messList",list);
        return "melist";
    }
-
+   @Log(operationName = "查看小组留言")
+   @RequestMapping("groupMess")
+    public String groupMess(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("User");
+        int gid =user.getGid();
+        List<User> users =userService.findByGid(gid);
+        System.out.println(users.size()+"查到的用户");
+        List<Message> list1=new ArrayList<Message>();
+        for (int i=0;i<users.size();i++){
+            int id=users.get(i).getId();
+            System.out.println(id+"用户ID");
+            List<Message> list =messageService.findByuse_id(id);
+            list1.addAll(list);
+            System.out.println("woliuyan");
+        }
+       request.getSession().setAttribute("groupList",list1);
+       return "groupList";
+   }
 }
