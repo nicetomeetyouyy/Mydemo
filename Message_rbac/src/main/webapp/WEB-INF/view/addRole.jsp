@@ -22,9 +22,9 @@
 <body>
 <div class="form" style="width: 300px; margin: 50px auto">
     <h2>添加角色信息</h2>
-    <form action="addRole" method="post" class="form-group">
-        <label for="rname">角色名称:</label>
-        <input type="text" name="rname" id="rname"  class="form-control">
+    <form action="addtoRole" method="get" class="form-group">
+        <label for="rolename">角色名称:</label>
+        <input type="text" name="rolename" id="rolename"  class="form-control">
 
         <%
             for (int i=0;i<length;i++
@@ -32,7 +32,7 @@
                 Access a=acclist.get(i);
         %>
         <label for="role<%=i%>">权限</label>
-        <input type="radio" name="role<%=i%>" id="role<%=i%>" value="<%=a.getId()%>" ><%=a.getName()%>
+        <input type="checkbox" name="role<%=i%>" id="role<%=i%>" value="<%=a.getId()%>" ><%=a.getName()%><br>
         <% }%>
 
         <br>

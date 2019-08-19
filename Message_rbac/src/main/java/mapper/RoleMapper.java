@@ -1,9 +1,11 @@
 package mapper;
 
 import entity.Role;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface RoleMapper {
      public Role findById(int id);
      public List<Role> findAll();

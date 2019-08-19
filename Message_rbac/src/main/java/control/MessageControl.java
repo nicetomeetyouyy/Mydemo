@@ -2,6 +2,7 @@ package control;
 
 import annotation.Log;
 import entity.Access;
+import entity.Image;
 import entity.Message;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import services.AccessService;
+import services.ImageService;
 import services.MessageService;
 import services.UserService;
 
@@ -23,11 +25,12 @@ import java.util.List;
 public class MessageControl {
     @Autowired
     private MessageService messageService;
-
     @Autowired
     private UserService userService;
     @Autowired
     private AccessService accessService;
+    @Autowired
+    private ImageService imageService;
     @Log(operationName = "用户登录")
     @RequestMapping("login")
     public String toMessageList(HttpServletRequest request) {
@@ -60,6 +63,15 @@ public class MessageControl {
             request.getSession().setAttribute("User",user);
             List<Message> list=messageService.findAll();
             List<User> list1 =userService.findAll();
+            int id=user.getId();
+//             List<Image> list2=imageService.findByUser(3);
+//             System.out.println(list2.size()+"adada");
+            Image image=imageService.findOne(id,1);
+            if(image!=null){
+                request.getSession().setAttribute("useImage",image);
+                System.out.println(image.getFilename());
+            }
+//            System.out.println(image.getIs_used()+"adada");
             request.getSession().setAttribute("userlist",list1);
             request.getSession().setAttribute("messList",list);
             request.getSession().setAttribute("allAcc",allAcc);
@@ -83,6 +95,12 @@ public class MessageControl {
         request.getSession().setAttribute("messList",list);
         List<Access> allAcc=accessService.findAll();
         request.getSession().setAttribute("allAcc",allAcc);
+        int id=user.getId();
+        Image image=imageService.findOne(id,1);
+        if(image!=null){
+            request.getSession().setAttribute("useImage",image);
+            System.out.println(image.getFilename());
+        }
         return  "melist";
     }
 

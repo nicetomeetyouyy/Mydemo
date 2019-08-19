@@ -33,7 +33,7 @@
                 Access a=accesses.get(i);
         %>
         <label for="role<%=i%>">权限</label>
-        <input type="radio" name="role<%=i%>" id="role<%=i%>" value="<%=a.getId()%>"
+        <input type="checkbox" name="role<%=i%>" id="role<%=i%>" value="<%=a.getId()%>"
         <%
             for (Access b :role_acc ) {
               if(a.getId()==b.getId()){

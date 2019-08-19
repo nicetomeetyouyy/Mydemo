@@ -28,6 +28,7 @@
             List<Role> list_ro= (List<Role>) request.getSession().getAttribute("roleList");
 
         %>
+
         <label for="uname">用户名:</label>
         <input type="text" name="uname" id="uname" value="<%=user.getUser_name()%>" class="form-control">
 

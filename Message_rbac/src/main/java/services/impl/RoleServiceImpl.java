@@ -8,7 +8,8 @@ import services.RoleServices;
 import services.UserService;
 
 import java.util.List;
-@Service
+
+@Service("roleService")
 public class RoleServiceImpl implements RoleServices {
     @Autowired
     private RoleMapper roleMapper;

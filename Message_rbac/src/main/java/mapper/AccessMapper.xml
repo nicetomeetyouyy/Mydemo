@@ -8,7 +8,7 @@
     </select>
     <select id="findBygroup" resultType="entity.Access">
          SELECT * FROM access WHERE id in(
-        SELECT gid FROM groups_acc WHERE gid =#{0}
+        SELECT aid FROM groups_acc WHERE gid =#{0}
         )
     </select>
     <select id="findAll" resultType="entity.Access">

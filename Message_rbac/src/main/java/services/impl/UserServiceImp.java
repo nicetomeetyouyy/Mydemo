@@ -1,5 +1,6 @@
 package services.impl;
 
+import annotation.Log;
 import entity.User;
 import mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("userServices")
 public class UserServiceImp implements services.UserService {
     @Autowired
     private UserMapper userMapper;
+
+
     @Override
     public List<User> findAll() {
         return userMapper.findAll();
@@ -35,7 +38,6 @@ public class UserServiceImp implements services.UserService {
     public void deleteUser(int id) {
         userMapper.deleteUser(id);
     }
-
     @Override
     public User findLogin(String name, String pwd) {
         return userMapper.findLogin(name,pwd);

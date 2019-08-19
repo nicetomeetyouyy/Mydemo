@@ -1,9 +1,11 @@
 package mapper;
 
 import entity.Message;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface MessageMapper {
     public List<Message> findAll();
     public List<Message> findByuse_id(int use_id);

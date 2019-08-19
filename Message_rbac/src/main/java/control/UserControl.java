@@ -1,37 +1,47 @@
 package control;
 
+import annotation.Log;
+import entity.Access;
 import entity.Role;
 import entity.User;
-import mapper.RoleMapper;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import services.AccessService;
 import services.RoleServices;
 import services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Attribute;
 
 @Controller
-@EnableAutoConfiguration
 public class UserControl {
     @Autowired
     private UserService userService;
     @Autowired
     private RoleServices roleServices;
+    @Autowired
+    private AccessService accessService;
+    @Log(operationName = "查看所有用户")
    @RequestMapping("userlist")
     public String findUserAll(HttpServletRequest request, HttpServletResponse response)throws Exception{
+       System.out.println("用户列表");
        List<User> list =userService.findAll();
-      /* for (User i:list
+       System.out.println(list==null);
+       for (User i:list
 
             ) {
            System.out.println(i.getRid());
-       }*/
+       }
+       User user=userService.findByname((String) request.getSession().getAttribute("username"));
+       List<Access> list_acc= accessService.findRole_acc(user.getRid());
+       List<Access> list_group=accessService.findBygroup(user.getGid());
+       list_acc.addAll(list_group);
+       user.setAccesses(list_acc);
+       request.getSession().setAttribute("User",user);
        List<Role> list1=  roleServices.findAll();
        request.setCharacterEncoding("UTF-8");
        response.setCharacterEncoding("UTF-8");
@@ -49,6 +59,7 @@ public class UserControl {
         System.out.println(user.getUser_name());
         return "addUser";
     }
+    @Log(operationName = "修改个人资料")
     @RequestMapping(value = "updatetoUser",method = RequestMethod.GET)
     public String updateToUser(HttpServletRequest request){
        String name=request.getParameter("uname");
@@ -72,6 +83,12 @@ public class UserControl {
         List<User> list =userService.findAll();
         request.getSession().setAttribute("userlist",list);
         request.getSession().setAttribute("roleList",list1);
+        User user3=userService.findByname((String) request.getSession().getAttribute("username"));
+        List<Access> list_acc= accessService.findRole_acc(user.getRid());
+        List<Access> list_group=accessService.findBygroup(user.getGid());
+        list_acc.addAll(list_group);
+        user3.setAccesses(list_acc);
+        request.getSession().setAttribute("User",user3);
         return "users";
     }
     @RequestMapping("LogginOut")
@@ -86,6 +103,7 @@ public class UserControl {
        request.getSession().setAttribute("up_user",users);
        return "up_Users";
     }
+    @Log(operationName = "修改用户资料")
     @RequestMapping("updateToUser")
     public String updatetoUser(HttpServletRequest request){
        String name=request.getParameter("uname");
@@ -110,6 +128,7 @@ public class UserControl {
         request.getSession().setAttribute("roleList",list1);
        return "addNewUser";
     }
+    @Log(operationName = "添加用户")
     @RequestMapping("addToUser")
     public String addToUser(HttpServletRequest request){
         String name=request.getParameter("uname");
@@ -126,6 +145,7 @@ public class UserControl {
         request.getSession().setAttribute("roleList",list1);
         return "users";
     }
+    @Log(operationName = "删除用户")
     @RequestMapping("userDelete")
     public String deleteUser(HttpServletRequest request){
        String id= request.getParameter("id");
@@ -142,6 +162,5 @@ public class UserControl {
        List<User> list =userService.findByGid(user.getGid());
         request.getSession().setAttribute("userlist",list);
         return "users";
-
     }
 }

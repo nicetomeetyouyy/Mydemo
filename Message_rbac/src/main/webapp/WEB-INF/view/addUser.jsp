@@ -1,4 +1,5 @@
-<%@ page import="entity.User" %><%--
+<%@ page import="entity.User" %>
+<%@ page import="entity.Image" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2019/8/1
@@ -16,6 +17,13 @@
 <body>
 <div class="form" style="width: 300px; margin: 50px auto">
     <h2>编辑您的用户信息</h2>
+    <%
+        Image image= (Image) request.getSession().getAttribute("useImage");
+        if(image==null){
+    %>
+    <img src="585747cfd354024.jfif" width="30" height="40"/><% }else {%>
+    <img src="<%=image.getFilename()%>"width="30" height="40"/><%}%>
+    <a href="uploadimage"><button  class="btn btn-success">修改头像</button> </a>
     <form action="updatetoUser" method="get" class="form-group">
         <%
             request.setCharacterEncoding("UTF-8");
@@ -39,10 +47,7 @@
         <input type="reset" value="重置" class="btn btn-danger">
 
     </form>
-    <a href="userlist" class="btn btn-link">返回用户列表</a>
+    <a href="melist" class="btn btn-link">返回留言</a>
 </div>
-
-
-
 </body>
 </html>

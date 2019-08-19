@@ -1,16 +1,14 @@
 package services.impl;
 
 import entity.Message;
-import entity.User;
 import mapper.MessageMapper;
-import mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import services.MessageService;
 
 import java.util.List;
 
-@Service
+@Service("messageService")
 public class MssageServiceImp implements MessageService {
     @Autowired
     private MessageMapper mapper;

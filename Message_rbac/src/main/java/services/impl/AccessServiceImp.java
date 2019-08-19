@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 import services.AccessService;
 
 import java.util.List;
-@Service
+
+@Service("accessService")
 public class AccessServiceImp implements AccessService {
     @Autowired
     private AccessMapper accessMapper;

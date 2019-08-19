@@ -3,6 +3,7 @@
 <%@ page import="entity.Message" %>
 <%@ page import="entity.User" %>
 <%@ page import="entity.Role" %>
+<%@ page import="entity.Access" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -12,7 +13,6 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -40,6 +40,19 @@
     List<Role> list_ro= (List<Role>) request.getSession().getAttribute("roleList");
     User user = (User) request.getSession().getAttribute("User");
     int rid=user.getRid();
+    List<Access> user_acc=user.getAccesses();
+
+    List<Access> allAcc= (List<Access>) request.getSession().getAttribute("allAcc");
+    int [] gids=new int [allAcc.size()];
+    for (int j=0;j<allAcc.size();j++
+    ) {
+        gids[j]=0;
+        for(int i=0;i<user_acc.size();i++){
+            if(allAcc.get(j).getId()==user_acc.get(i).getId()){
+                gids[j]=1;}
+        }
+    }
+
     //    List<Message> list=messageslist;
 
 %>
@@ -76,7 +89,7 @@
             if(list!=null) {
                 for (User u:list
                 ) {
-                    System.out.println(u.getRid()-1);
+
                     Role role=list_ro.get(u.getRid()-1);
 
         %>
@@ -101,13 +114,12 @@
             <th><%if(rid==1){%>
                 <%=u.getGid()%>
                 <%}%></th>
-            <th><%if(rid==1){%>
+            <th><%if(rid==1||user.getId()==u.getId()||gids[8]==1){%>
                 <a href="updateUserAll?name=<%=u.getUser_name()%>">编辑</a>
                 <%}%></th>
-            <th><%if(rid==1){%>
-                <a href="userDelete?id=<%=u.getId()%>">删除</a>
-                <%}%></th>
-            <% }}%>
+            <th><%if(rid==1||user.getId()==u.getId()||gids[9]==1){%>
+                <a href="userDelete?id=<%=u.getId()%>">删除</a></th>
+            <% }}}%>
         </tr>
         </tbody>
         <%-- <%}}%>--%>

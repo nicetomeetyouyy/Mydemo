@@ -2,7 +2,6 @@
 <%@ page import="entity.Message" %>
 <%@ page import="entity.User" %>
 <%@ page import="entity.Access" %>
-<%@ page import="entity.Image" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -33,19 +32,16 @@
 
 
 
-<%
+    <%
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
     response.setContentType("text/html;charset=UTF-8");
 //    request.setAttribute("messagelist",messageslist);
-    List<Message> list =(List<Message>)request.getSession().getAttribute("messList");
+    List<Message> list =(List<Message>)request.getSession().getAttribute("groupList");
     User user = (User) request.getSession().getAttribute("User");
-    List<User>users= (List<User>) request.getSession().getAttribute("userlist");
     List<Access> user_acc=user.getAccesses();
     List<Access> allAcc= (List<Access>) request.getSession().getAttribute("allAcc");
-    int rid=user.getRid();
     int [] gids=new int [allAcc.size()];
-    String ac="ac";
     for (int j=0;j<allAcc.size();j++
          ) {
         gids[j]=0;
@@ -54,66 +50,15 @@
           gids[j]=1;}
         }
     }
-    /*System.out.println(gids.length);
-    for (int i=0;i<gids.length;i++
-         ) {
-        System.out.println(gids[i]+" "+allAcc.get(i).getName());
-    }*/
-
+    //    List<Message> list=messageslist;
 
 %>
 <div style="position:absolute;top: 0;right: 0;">
-    <%
-        Image image= (Image) request.getSession().getAttribute("useImage");
-        if(image==null){
-    %>
-    <img src="585747cfd354024.jfif" width="30" height="40"/><% }else {%>
-    <img src="<%=image.getFilename()%>"width="30" height="40"/><%}%>
     <% String names =(String)session.getAttribute("username");%>
     欢迎:<%= names %>
     <form action="LogginOut" method="get"><input type="submit" value="退出" class="btn btn-danger"></form><br>
-    <%
-
-        if(rid==1||gids[4]==1){
-    %>
-    <form action="userlist"><input type="submit" value="用户信息列表" class="btn btn-success"></form>
-    <%}%>
-    <%
-
-        if(rid!=4){
-    %>
-
-    <form action="updateUser"method="post"><input type="submit" value="修改个人信息" class="btn btn-success"></form>
-    <%}%>
-    <% if(rid!=1){%>
-    <form action="groupMess" method="post"><input type="submit" value="操作同组用户留言" class="btn btn-success"></form>
-   <% }if(rid==1){
-    %> <form action="operation" method="get"><input type="submit" value="操作信息" class="btn btn-info"></form>
-    <%}%>
 </div>
-<div style="position: absolute;top: 0px;left: 250px">
-    <%
 
-            if(rid==1||gids[5]==1){
-    %>
-    <form method="get" action="findMessageByuser">
-        输入用户名查找留言信息：
-        <input type="search" name="serchmessage">
-        <input type="submit" value="搜索" class="btn btn-info"><br>
-    </form>
-    <%}
-
-
-    %>
-    <form method="get" action="addMessage"><input type="submit" value="新建留言" class="btn btn-info"></form>
-
-       <%
-            if(rid==1||gids[6]==1){
-    %>
-    <form action="to_acc" method="get"><input type="submit" value="角色权限管理" class="btn btn-info"></form>
-    <%}%>
-
-</div>
 <div class="table1">
     <!-- 表头	 -->
     <h2>留言信息列表</h2>
@@ -125,15 +70,10 @@
             <th>留言序列</th>
             <th>留言标题</th>
             <th>留言内容</th>
-            <%
-
-                if(user.getRid()!=4){%>
             <th>创建时间</th>
             <th>更新时间</th>
             <th>用户ID</th>
             <th>留言操作</th>
-            <% } %>
-        </tr>
         </thead>
         <%
             if(list!=null) {
@@ -147,24 +87,18 @@
             <th><%=m.getId()%></th>
             <th><%=m.getTitle()%></th>
             <th><%=m.getContent()%></th>
-            <th><%
-                if(rid==1||gids[0]==1)
-            {%>         <%=m.getCtime()%>
+            <th>   <%=m.getCtime()%>
 
-                <%}%></th>
-            <th><%
-                if(rid==1||gids[0]==1)
-                {%>      <%=m.getUptime()%>
+               ></th>
+            <th>    <%=m.getUptime()%>
 
-                <%}%></th>
-            <th><%
-                if(rid==1||gids[0]==1)
-                {%>  <%=m.getUse_id()%>
+                </th>
+            <th>  <%=m.getUse_id()%>
 
-                <%}%></th>
+                </th>
             <th><%
 
-                if(rid==1||user.getId()==m.getUse_id()||gids[1]==1)
+                if(user.getId()==m.getUse_id()||gids[13]==1)
                 {   /*if(gids[1]!=0){
                     System.out.println("权限是"+gids[1]);
                 }*/
@@ -172,7 +106,7 @@
                 <a href="updateMessage?id=<%=m.getId()%>"  >编辑</a><%}%>
                 <%
 
-                    if(rid==1||rid==2||user.getId()==m.getUse_id()||gids[2]==1)
+                    if(user.getId()==m.getUse_id()||gids[12]==1)
                     {%>
                 <a href="deleteMessage?delete_id=<%=m.getId()%>"  >删除</a><% }%>
             </th>
@@ -188,7 +122,3 @@
     <a href="melist" class="btn btn-link">留言列表</a>
 
 </div>
-
-
-</body>
-</html>

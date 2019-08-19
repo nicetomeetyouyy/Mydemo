@@ -12,7 +12,7 @@ public class User {
     private int gid;
     private List<Access> accesses;
     private Role role;
-    public User(int id, String user_name, String pwd, String email, String phone, int rid, int gid,Role role) {
+    public User(int id, String user_name, String pwd, String email, String phone, int rid, int gid, Role role) {
         this.id = id;
         this.user_name = user_name;
         this.pwd = pwd;
