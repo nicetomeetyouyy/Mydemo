@@ -32,7 +32,7 @@
         if(list.size()!=0){
     %>--%>
     <form action="updateImage" method="post" class="form-group">
-     <label>历史头像</label>
+     <label>历史头像</label><br>
         <% List<Image>list= (List<Image>) request.getSession().getAttribute("images");
         if(list!=null){
             for (Image i:list
@@ -40,6 +40,7 @@
         %>
          <input type="radio" name="imageHistory" value="<%=i.getId()%>" <%if(
                  i.getIs_used()==1){%>checked<%}%>/><img src="<%=i.getFilename()%>" width="30" height="40">
+        <a href="deleteImage?image_id=<%=i.getId()%>">删除</a><br>
         <%}}
         %>
         <input type="submit" value="修改" class="btn btn-success" >

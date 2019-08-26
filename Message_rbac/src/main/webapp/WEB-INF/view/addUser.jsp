@@ -1,5 +1,6 @@
 <%@ page import="entity.User" %>
-<%@ page import="entity.Image" %><%--
+<%@ page import="entity.Image" %>
+<%@ page import="entity.Moneys" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2019/8/1
@@ -30,6 +31,7 @@
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html;charset=UTF-8");
             User user =(User) request.getSession().getAttribute("User");
+            Moneys money= (Moneys) request.getSession().getAttribute("money");
         %>
         <label for="uname">用户名:</label>
         <input type="text" name="uname" id="uname" value="<%=user.getUser_name()%>" class="form-control">
@@ -47,7 +49,14 @@
         <input type="reset" value="重置" class="btn btn-danger">
 
     </form>
-    <a href="melist" class="btn btn-link">返回留言</a>
+
+       <label >余额:</label><%=money.getMoney()%><br>
+        <form action="addMoney" method="post">
+            <input type="number" name="addMoney"><input type="submit" value="充值">
+        </form>
+
+         <a href="billList" class="btn btn-link">查看个人账单</a>
+        <a href="melist" class="btn btn-link">返回留言</a>
 </div>
 </body>
 </html>

@@ -25,7 +25,7 @@
         delete FROM users where id =#{0}
     </delete>
     <select id="findLogin"  resultType="entity.User">
-        SELECT * from users where user_name=#{0}AND pwd=#{1}
+        SELECT * from users where user_name=#{0} AND pwd=#{1}
     </select>
     <delete id="deleteUserRid" parameterType="int" >
         delete FROM users where rid= #{0}

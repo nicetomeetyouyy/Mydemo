@@ -5,7 +5,7 @@
         SELECT * FROM operation ORDER BY id DESC
     </select>
     <select id="findByOpe" parameterType="String" resultType="entity.Operation">
-        SELECT * FROM `operation`WHERE ope like #{0}
+        SELECT * FROM operation WHERE ope like #{0}
     </select>
     <insert id="insertOperation" parameterType="entity.Operation">
         INSERT INTO operation(user_name,user_id,ope,time,nowtime,result)

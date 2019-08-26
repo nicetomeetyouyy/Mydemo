@@ -163,7 +163,9 @@
 
                 <%}%></th>
             <th><%
-
+                 if (user.getId()!=m.getUse_id()){%>
+                <a href="costMoney?addUser=<%=m.getUse_id()%>" >打赏</a>
+                <% }
                 if(rid==1||user.getId()==m.getUse_id()||gids[1]==1)
                 {   /*if(gids[1]!=0){
                     System.out.println("权限是"+gids[1]);

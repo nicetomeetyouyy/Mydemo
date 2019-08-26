@@ -1,5 +1,6 @@
 package control;
 
+import annotation.Log;
 import entity.Image;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class ImageControl {
         }
         return "addPicture";
     }
+    @Log(operationName = "上传新头像")
     @RequestMapping("addImage")
     public String addImage(MultipartFile picture,HttpServletRequest request) throws IOException {
         if(picture.isEmpty()){
@@ -73,6 +75,7 @@ public class ImageControl {
             return  "addPicture";
         }
     }
+    @Log(operationName = "更改头像")
     @RequestMapping("updateImage")
     public void updateImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String id=request.getParameter("imageHistory");
@@ -89,6 +92,18 @@ public class ImageControl {
         if(image!=null){
             request.getSession().setAttribute("useImage",image);
         }
+        request.getRequestDispatcher("uploadimage").forward(request,response);
+    }
+    @RequestMapping("deleteImage")
+    @Log(operationName = "删除历史头像")
+    public void deleteImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String id=request.getParameter("image_id");
+        System.out.println(id);
+        imageService.deleteImage(Integer.valueOf(id));
+        User user= (User) request.getSession().getAttribute("User");
+        int user_id=user.getId();
+        Image image=imageService.findOne(user_id,1);
+        request.getSession().setAttribute("useImage",image);
         request.getRequestDispatcher("uploadimage").forward(request,response);
     }
 }

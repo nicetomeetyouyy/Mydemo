@@ -2,6 +2,7 @@ package control;
 
 import annotation.Log;
 import entity.Access;
+import entity.Moneys;
 import entity.Role;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import services.AccessService;
+import services.MoneyService;
 import services.RoleServices;
 import services.UserService;
 
@@ -25,6 +27,8 @@ public class UserControl {
     private RoleServices roleServices;
     @Autowired
     private AccessService accessService;
+    @Autowired
+    private MoneyService moneyService;
     @Log(operationName = "查看所有用户")
    @RequestMapping("userlist")
     public String findUserAll(HttpServletRequest request, HttpServletResponse response)throws Exception{
@@ -55,8 +59,11 @@ public class UserControl {
     public String updateUser(HttpServletRequest request){
         String name =(String)request.getSession().getAttribute("username");
         User user =userService.findByname(name);
+        int user_id=user.getId();
         request.getSession().setAttribute("User",user);
-        System.out.println(user.getUser_name());
+//        System.out.println(user.getUser_name());
+        Moneys moneys=moneyService.findMoney(user_id);
+        request.getSession().setAttribute("money",moneys);
         return "addUser";
     }
     @Log(operationName = "修改个人资料")
