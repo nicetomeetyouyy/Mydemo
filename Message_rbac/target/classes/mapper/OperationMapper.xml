@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.OperationMapper">
+    <select id="findOperation" resultType="entity.Operation">
+        SELECT * FROM operation ORDER BY id DESC
+    </select>
+    <select id="findByOpe" parameterType="String" resultType="entity.Operation">
+        SELECT * FROM operation WHERE ope like #{0}
+    </select>
+    <insert id="insertOperation" parameterType="entity.Operation">
+        INSERT INTO operation(user_name,user_id,ope,time,nowtime,result)
+        VALUES (#{user_name},#{user_id},#{ope},#{time},NOW(),#{result})
+    </insert>
+</mapper>

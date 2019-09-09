@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.BillMapper">
+    <select id="findAll" resultType="entity.Bill">
+        SELECT * FROM bill
+    </select>
+    <select id="findByUser" parameterType="int" resultType="entity.Bill">
+        SELECT * FROM bill WHERE user_id=#{0}
+    </select>
+    <insert id="insertBill" parameterType="entity.Bill">
+        INSERT INTO bill(type,amount,time,user_id)
+        VALUES (#{type},#{amount},NOW(),#{user_id})
+    </insert>
+</mapper>

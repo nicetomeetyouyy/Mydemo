@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.ImageMapper">
+    <select id="findByUser" parameterType="int" resultType="entity.Image">
+        SELECT * FROM images WHERE user_id=#{0}
+    </select>
+    <insert id="insertImage" parameterType="entity.Image" >
+        INSERT into images (filename,user_id,is_used)
+        VALUES (#{filename},#{user_id},#{is_used})
+    </insert>
+    <update id="updateImage">
+        update images SET
+        is_used =#{0}
+        WHERE id=#{1} AND user_id=#{2}
+    </update>
+    <delete id="deleteImage" parameterType="int">
+        delete from images WHERE id=#{0}
+    </delete>
+    <select id="findOne" resultType="entity.Image">
+        SELECT * FROM images WHERE user_id=#{0} AND is_used=#{1}
+    </select>
+</mapper>

@@ -2,7 +2,7 @@ package com.xjm.demo;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "spring.hello")
+@ConfigurationProperties(prefix ="spring.hello")
 public class HelloProperties {
     private String prefix;
     private String sufix;
