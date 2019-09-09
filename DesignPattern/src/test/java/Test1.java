@@ -16,6 +16,7 @@ import com.xjm.demo.factory.ConcreteFactory2;
 import com.xjm.demo.proxy.Proxy;
 import com.xjm.demo.simplefactory.Factory;
 import com.xjm.demo.simplefactory.Product;
+import com.xjm.demo.strategy.InsertionSort;
 import org.junit.Test;
 public class Test1 {
 
@@ -110,5 +111,15 @@ public class Test1 {
         shape.draw();
 
     }
+    @Test
+   public void sortTest(){
+        int []a ={3,6,7,2,5,1,8};
+        InsertionSort i=new InsertionSort();
+        i.sort(a);
+        for (int b:a
+             ) {
+            System.out.println(b);
+        }
 
+    }
 }

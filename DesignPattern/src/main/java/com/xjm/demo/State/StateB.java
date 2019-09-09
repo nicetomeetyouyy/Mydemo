@@ -1,8 +1,13 @@
 package com.xjm.demo.State;
 
+/**
+ * B状态
+ */
 public class StateB implements State {
-    private
-    public void Handle() {
+
+    public void Handle(Context context) {
+        System.out.println("我是B状态");
+        context.setState(new StateA());
 
     }
 }
