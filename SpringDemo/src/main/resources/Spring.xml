@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+<bean id="Hello" class="com.xjm.demo.hello.Hello">
+    <constructor-arg name="num" value="2"></constructor-arg>
+    <constructor-arg type="java.lang.String" value="xixi"></constructor-arg>
+</bean>
+    <!-- 配置jdbcTemplate -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 配置数据源   -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/internship2"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="123456"></property>
+    </bean>
+    <bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+<!--    配置事务的的属性-->
+    <tx:advice id="txAdvice" transaction-manager="dataSourceTransactionManager">
+     <tx:attributes>
+         <tx:method name="*" read-only="false" propagation="REQUIRED" timeout="-1"/>
+         <tx:method name="find*" read-only="true" propagation="SUPPORTS"></tx:method>
+     </tx:attributes>
+    </tx:advice>
+<!--    配置AOP切入-->
+    <aop:config >
+        <aop:pointcut id="pit1" expression="execution(* *.*.*.hello.Hello.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pit1"></aop:advisor>
+    </aop:config>
+</beans>
