@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+<!--    控制器层扫描-->
+    <context:component-scan base-package="com.xjm.controller"/>
+<!--    配置注册HandlerMapping和HandlerAdapter-->
+    <mvc:annotation-driven/>
+<!--    配置视图解析器-->
+    <bean id="resourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+<!--    配置MultipartResovler解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10000"></property>
+    </bean>
+<!--    全局拦截器配置-->
+<!--    <mvc:interceptors>
+        <bean class="com.xjm.intercept.DemoIntercept"></bean>
+    </mvc:interceptors>-->
+<!--    配置单个控制器-->
+<mvc:interceptors>
+    <mvc:interceptor>
+        <mvc:mapping path="/mav"/>
+        <bean class="com.xjm.intercept.DemoIntercept"></bean>
+    </mvc:interceptor>
+</mvc:interceptors>
+</beans>

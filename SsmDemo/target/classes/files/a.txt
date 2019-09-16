@@ -1,0 +1,96 @@
+数据库题目:
+
+1. 展示当前Mysql 里面有哪些数据库
+     show databases
+2. 创建数据库  internship
+     CREATE DATABASE internship
+3. 使用数据库  internship
+     USE internship
+4. 创建 用户表 ,表名,列名和数据类型选用自认为最合适的
+    用户表有字段 
+       主键id,用户名,密码,用户邮箱,用户手机号,其中主键是自增的
+	   CREATE TABLE  users(
+      id INT PRIMARY KEY AUTO_INCREMENT,
+      user_name VARCHAR(4) NOT NULL,
+      pwd VARCHAR(10) NOT NULL,
+      email VARCHAR(12) ,
+      phone CHAR(11))
+5. 创建 留言表
+       主键id(自增的),留言标题,留言详细内容,留言创建时间,留言编辑时间,留言用户id
+CREATE TABLE  message(
+id INT PRIMARY KEY AUTO_INCREMENT,
+title VARCHAR(20) NOT NULL,
+content VARBINARY(50) ,
+ctime DATETIME,
+uptime DATETIME,
+use_id INT
+)
+6. 创建外键,留言表和用户表之间的
+   ALTER TABLE message ADD FOREIGN KEY (use_id) REFERENCES users (id);
+7. 创建2个用户 
+     INSERT INTO users 
+	 (id, user_name, pwd, email， phone) 
+	 VALUES ('1', '张三', '123', 'zh@qq.com', '12345678999'); 
+      NSERT INTO users 
+	 (id, user_name, pwd, email， phone) 
+	 VALUES ('2', '李四', '123', '李四@qq.com', '31236144728')     
+8. 每个用户创建3条留言
+INSERT INTO message
+ (`id`, `title`, `content`, `ctime`, `uptime`, `use_id`) 
+ VALUES ('1', '大家好', '我是新来的，你们好吗', NOW(), NOW(), '1');
+    INSERT INTO message
+ (`id`, `title`, `content`, `ctime`, `uptime`, `use_id`) 
+ VALUES ('2', 'whdfaf', '我又来了', NOW(), NOW(), '1');
+ INSERT INTO message
+ (`id`, `title`, `content`, `ctime`, `uptime`, `use_id`) 
+ VALUES ('2', 'whdfaf', '我又来了', NOW(), NOW(), '1');
+ INSERT INTO message
+ (`id`, `title`, `content`, `ctime`, `uptime`, `use_id`) 
+ VALUES ('4', '我是李四 ', '我是李四我来了', NOW(), NOW(),'2');
+ INSERT INTO message
+ (`id`, `title`, `content`, `ctime`, `uptime`, `use_id`) 
+ VALUES ('5', '你们好吗 ', '我李四我再来了', NOW(), NOW(),'2');
+ INSERT INTO message
+ (`id`, `title`, `content`, `ctime`, `uptime`, `use_id`) 
+ VALUES ('6', '你们好吗 ', '我李四我最后来了', NOW(), NOW(),'2');
+9.删除第二个用户以及他的所有留言
+  DELETE FROM message WHERE use_id=2;
+  DELETE FROM users WHERE id =2;
+10.创建1个新用户,并给他创建2个留言
+    INSERT INTO users (`user_name`, `pwd`, `email`, `phone`) 
+	VALUES ('王五', '123', 'ww@qq.com', '12345678909'); 
+	INSERT INTO message
+ ( `title`, `content`, `ctime`, `uptime`, `use_id`) 
+ VALUES ( '你们好吗 ', '我王五我来了', NOW(), NOW(),'3');
+ INSERT INTO message
+ (`title`, `content`, `ctime`, `uptime`, `use_id`) 
+ VALUES ( 'zaiyici ', '我王五我最后来了', NOW(), NOW(),'3');
+11.编辑第一个用户的 按照 创建时间排序(第一条是时间最新的)的 第二条留言,留言内容结尾加上 "update",不准用留言id直接关联
+   UPDATE message 
+SET content= CONCAT(content,'update')
+WHERE message.`id`=(SELECT a.id FROM
+(SELECT id FROM message 
+WHERE message.`use_id`=1 
+ORDER BY message.`ctime` DESC
+LIMIT 1,1) AS a
+)
+11.显示第一个用户的所有留言 ,注意显示结果包括用户名和手机号
+   SELECT content ,users.`phone`,users.`user_name` 
+FROM message ,users 
+WHERE message.`use_id`=users.`id`AND users.`id`=1;
+12. 显示每个用户的留言数目,结果包括用户邮箱
+SELECT users.`user_name`,COUNT(users.`id`)AS 数量, users.`email` 
+FROM message ,users WHERE users.`id`=message.`use_id`
+GROUP BY users.`id` 
+13. 显示每个用户的最新的一条留言
+SELECT	message.`content`,use_id
+FROM message
+WHERE message.`ctime` IN(
+SELECT MAX(message.`ctime`)AS ctime 
+FROM message ,users WHERE users.`id`=message.`use_id`
+GROUP BY users.`id`)
+14. 创建数据库  internship2
+CREATE DATABASE internship2
+15.导出  internship 的数据 并导入到  internship2 数据库,表结构维持不变
+   导出MySQLdump -h localhost -u root -p internship >D:\mysql-5.7.26-winx64\data\internship.sql
+   导入MySQL -h localhost -u root -p internship2 < D:\mysql-5.7.26-winx64\data\internship.sql

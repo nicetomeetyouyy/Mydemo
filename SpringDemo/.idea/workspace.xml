@@ -67,8 +67,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="8" />
-    <option name="y" value="17" />
+    <option name="x" value="301" />
+    <option name="y" value="25" />
     <option name="width" value="784" />
     <option name="height" value="660" />
   </component>
@@ -78,71 +78,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
-            <path>
-              <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SpringDemo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SpringDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SpringDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SpringDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SpringDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="demo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SpringDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="demo" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SpringDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="demo" type="462c0819:PsiDirectoryNode" />
-              <item name="hello" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SpringDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SpringDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
             <path>
               <item name="SpringDemo" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
@@ -151,10 +89,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -205,15 +145,15 @@
       <updated>1568019664989</updated>
       <workItem from="1568019669710" duration="1248000" />
       <workItem from="1568076362351" duration="14085000" />
-      <workItem from="1568168865577" duration="228000" />
+      <workItem from="1568168865577" duration="350000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15333000" />
+    <option name="totallyTimeSpent" value="15683000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="17" width="784" height="660" extended-state="0" />
+    <frame x="301" y="25" width="784" height="660" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4976852" visible="true" weight="0.34668508" />
       <window_info id="Structure" order="1" sideWeight="0.5023148" side_tool="true" weight="0.18456884" />
